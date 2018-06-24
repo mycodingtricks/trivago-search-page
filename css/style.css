@@ -153,8 +153,12 @@ header nav .dropdown-menu{
 }
 
 /*Sidebar*/
-.sidebar-left{
+.sidebar-left{    
     border-right:1px solid rgba(0,0,0,0.3);
+    border-left:1px solid rgba(0,0,0,0.3);
+    padding-bottom: 40px;
+/*    max-height: 100vh;
+    overflow-y: ;*/
 }
 .filter_box{
     
@@ -169,8 +173,14 @@ header nav .dropdown-menu{
     font-size: 13px;
     font-weight: bold;
     margin-bottom:0px;
+    padding: 5px 10px;
 }
 .filter_title label span{
     color: #000000;
     font-weight: normal;
+}
+.filter_body{
+    padding:5px 0px;
+    max-height: 250px;
+    overflow-y: auto;
 }

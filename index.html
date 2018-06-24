@@ -109,7 +109,7 @@
                                                 <i class="far fa-calendar"></i>
                                             </span>
                                             <span class="btn_horus_content">
-                                                <small class="btn_horus_type">Check-In </small>
+                                                <small class="btn_horus_type">Check-in </small>
                                                 <strong id="search_checkin_str" class="btn_horus_val"><em>_ _-__-____</em></strong>
                                             </span>
                                         </button>
@@ -121,7 +121,7 @@
                                                 <i class="far fa-calendar"></i>
                                             </span>
                                             <span class="btn_horus_content">
-                                                <small class="btn_horus_type">Check-In</small>
+                                                <small class="btn_horus_type">Check-out</small>
                                                 <strong id="search_checkout_str" class="btn_horus_val"><em>_ _-__-____</em></strong>
                                             </span>
                                         </button>
@@ -151,25 +151,99 @@
                     </div>
                 </div>
             </div>
-            <div class="main-content">
+            <div class="main-content bg-light">
                 <div class="container">
                     <div class="row">
-                        <div class="sidebar-left col-12 px-0 col-sm-4 col-md-3 sticky-top">
-                            <div class="bg-dark text-white p-2">
-                                <strong>Filter</strong>
-                            </div>
-                            <form action="javascript:void(0);">
-                            <div class="filter_box">
-                                <div class="filter_title">
-                                    <label for="customRange2">Price <span class="float-right d-inline-block">max. <span id="search_price_max"></span><span></label>
+                        <div class="col-12 px-0 col-sm-4 col-md-3">
+                            <div class="bg-white sidebar-left sticky-top d-sm-block d-none">
+                                <div class="bg-dark text-white p-2">
+                                    <strong>Filter</strong>
                                 </div>
-                                <div class="filter_body">
-                                    <input type="range" class="custom-range" min="700" oninput="updatePrice('#search_price_max',this.value);" value="4500" max="10000" id="search_price">
+                                <form action="javascript:void(0);">
+                                <div class="filter_box">
+                                    <div class="filter_title">
+                                        <label for="customRange2">Price <span class="float-right d-inline-block">max. <span id="search_price_max"></span><span></label>
+                                    </div>
+                                    <div class="filter_body px-3">
+                                        <input type="range" class="custom-range" min="700" oninput="updatePrice('#search_price_max',this.value);" value="4500" max="10000" id="search_price">
+                                    </div>
                                 </div>
+                                <div class="filter_box">
+                                    <div class="filter_title">
+                                        <label for="search_ratings">Rating</label>
+                                    </div>
+                                    <div class="filter_body px-3" id="search_ratings">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" value="5" name="rating" id="starRadio5" class="custom-control-input">
+                                            <label class="custom-control-label text-warning" for="starRadio5"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" value="4" name="rating" id="starRadio4" class="custom-control-input">
+                                            <label class="custom-control-label text-warning" for="starRadio4"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" value="3" name="rating" id="starRadio3" class="custom-control-input">
+                                            <label class="custom-control-label text-warning" for="starRadio3"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" value="2" name="rating" id="starRadio2" class="custom-control-input">
+                                            <label class="custom-control-label text-warning" for="starRadio2"><i class="fa fa-star"></i><i class="fa fa-star"></i></label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" value="1" name="rating" id="starRadio1" class="custom-control-input">
+                                            <label class="custom-control-label text-warning" for="starRadio1"><i class="fa fa-star"></i></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filter_box">
+                                    <div class="filter_title">
+                                        <label for="search_guest_ratings">Guest Rating</label>
+                                    </div>
+                                    <div class="filter_body px-3" id="search_guest_ratings">
+                                        <div class="my-3 custom-control custom-radio">
+                                            <input type="radio" value="5" name="rating" id="starGuestRadio5" class="custom-control-input">
+                                            <label class="custom-control-label" for="starGuestRadio5"><span class="bg-success p-2 text-white"><strong>8.5+</strong></span> Excellent</label>
+                                        </div>
+                                        <div class="my-3 custom-control custom-radio">
+                                            <input type="radio" value="4" name="rating" id="starGuestRadio4" class="custom-control-input">
+                                            <label class="custom-control-label" for="starGuestRadio4"><span class="bg-primary p-2 text-white"><strong>8.0+</strong></span> Very Good</label>
+                                        </div>
+                                        <div class="my-3 custom-control custom-radio">
+                                            <input type="radio" value="3" name="rating" id="starGuestRadio3" class="custom-control-input">
+                                            <label class="custom-control-label" for="starGuestRadio3"><span class="bg-info p-2 text-white"><strong>7.5+</strong></span> Good</label>
+                                        </div>
+                                        <div class="my-3 custom-control custom-radio">
+                                            <input type="radio" value="2" name="rating" id="starGuestRadio2" class="custom-control-input">
+                                            <label class="custom-control-label" for="starGuestRadio2"><span class="bg-warning p-2 text-white"><strong>7.0+</strong></span> Excellent</label>
+                                        </div>
+                                        <div class="my-3 custom-control custom-radio">
+                                            <input type="radio" value="1" name="rating" id="starGuestRadio1" class="custom-control-input">
+                                            <label class="custom-control-label" for="starGuestRadio1"><span class="bg-danger p-2 text-white"><strong>0+</strong></span> Okay</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="filter_box">
+                                        <div class="filter_title"><label for="hotel_facilites">Facilities</label></div>
+                                        <div class="filter_body px-3" id="hotel_facilities">
+                                            <script>
+                                                var f = ["free Wifi","Spa","Air conditioning","Breakfast","Car Park","Pool","Pet Friendly"];
+                                                var html = "";
+                                                for(var i=0;i<f.length;i++){
+                                                    html += "<div class=\"custom-control custom-radio\">"
+                                                            +"<input type=\"radio\" value='"+i+"' name='facilities' id=\"facilityRadio"+i+"\" class=\"custom-control-input\">"
+                                                            +"<label class=\"custom-control-label\" for=\"facilityRadio"+i+"\"><span class='badge badge-pill badge-primary'>"+f[i]+"</span></label>"
+                                                            +"</div>";
+                                                }
+                                                document.getElementById("hotel_facilities").innerHTML = html;
+                                            </script>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            </form>
                         </div>
-                        <div class="col-12 col-sm-8 col-md-9"></div>
+                        <div class="col-12 col-sm-8 col-md-9 py-3" id='search_result'>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
