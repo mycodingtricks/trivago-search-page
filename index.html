@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Trivago Search</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script>window.site_url = "http://localhost:8383/trivago_search";</script>
+</head>
+<body>
+
+    <div data-active="true" data-page="index">
+        <div class="container mt-5 py-5 px-3 px-sm-5 page-inner">
+            <div class="row">
+                <div class="col-12 col-sm-6 text-center text-sm-left">
+                    <img src="img/logo.png" class="img-fluid"/>
+                </div>
+                <div class="col-12 col-sm-6 text-center">
+                    <p class='h4 d-lg-block d-none pt-lg-4'>Find your ideal hotel and compare prices from different websites.<p>
+                    <p class='h5 d-sm-block d-lg-none d-none'>Find your ideal hotel and compare prices from different websites.<p>
+                    <p class='h6 d-sm-none d-block'>Find your ideal hotel and compare prices from different websites.<p>
+                </div>
+            </div>
+            <div class='row mt-4'>
+                <div class='col-12'>
+                    <form action='./' method='GET' class='index_search_form'>
+                        <div class='d-flex'>
+                            <span><i class='fa fa-search'></i></span>
+                            <input id="searchQ" onkeyup="changePage('search');" type='search' name='q' autocomplete="off" placeholder="e.g. Mumbai"/>
+                            <input type='submit' value="Search" class='btn btn-primary'/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-page="search" data-onload="initSearchPage">
+        <header>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 px-0 justify-content-end header-container">
+                        <a href="./" class="logo">                            
+                            <img src="img/logo.png" class="img-fluid"/>
+                        </a>
+                        <nav class="navbar navbar-expand-md navbar-light float-right">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        My Account
+                                      </a>
+                                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Login</a>
+                                        <a class="dropdown-item" href="#">Sign Up</a>
+                                      </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row bg-light d-md-none">
+                    <div class="col-12">
+                        <div class="collapse navbar-expand-lg navbar-light navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                              <li class="nav-item active">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                              </li>
+                              <li class="nav-item active">
+                                <a class="nav-link" href="#">Login</span></a>
+                              </li>
+                              <li class="nav-item active">
+                                <a class="nav-link" href="#">Sign up</span></a>
+                              </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="search_container py-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 page-inner">
+                            <form class="search_form">
+                                <div class='d-flex form-group index_search_form'>
+                                    <div class="autocomplete w-100 d-flex">
+                                        <span><i class="fa fa-search"></i></span>
+                                        <input id="search_q" type="search" name="q" autocomplete="off" placeholder="e.g. Mumbai">
+                                    </div>
+                                    <input type='submit' value="Search" class='btn btn-primary'/>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6 col-sm-4 pr-1">
+                                        <button type="button" onclick="$('#search_checkin').data('daterangepicker').show()" class="btn-light btn_horus btn-sm btn btn-block d-flex">
+                                            <span class="btn_horus_icon">
+                                                <i class="far fa-calendar"></i>
+                                            </span>
+                                            <span class="btn_horus_content">
+                                                <small class="btn_horus_type">Check-In </small>
+                                                <strong id="search_checkin_str" class="btn_horus_val"><em>_ _-__-____</em></strong>
+                                            </span>
+                                        </button>
+                                        <input type="text" style="position:absolute;width:1px;height:1px;background:transparent;border:0px;" id="search_checkin"/>
+                                    </div>
+                                    <div class="form-group col-6 col-sm-4 pl-1">
+                                        <button type="button" onclick="$('#search_checkout').data('daterangepicker').show()" class="btn-light btn_horus btn-sm btn btn-block d-flex">
+                                            <span class="btn_horus_icon">
+                                                <i class="far fa-calendar"></i>
+                                            </span>
+                                            <span class="btn_horus_content">
+                                                <small class="btn_horus_type">Check-In</small>
+                                                <strong id="search_checkout_str" class="btn_horus_val"><em>_ _-__-____</em></strong>
+                                            </span>
+                                        </button>
+                                        <input style="position:absolute;width:1px;height:1px;background:transparent;border:0px" type="text" id="search_checkout"/>
+                                    </div>
+                                    <div class="form-group col-12 col-sm-4">
+                                        <div class="dropdown">
+                                            <button class="btn btn_horus btn-light btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="btn_horus_icon">
+                                                    <i class="fa fa-user-friends"></i>
+                                                </span>
+                                                <span class="btn_horus_content">
+                                                    <small class="btn_horus_type">Room Type</small>
+                                                    <strong id="search_checkout_str" class="btn_horus_val">Double Room</strong>
+                                                </span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <button class="dropdown-item" type="button" onclick="updateHorusButton('#dropdownMenu2','far fa-user','Single Room');"><i class="far fa-user"></i> Single Room</button>
+                                              <button class="dropdown-item" type="button" onclick="updateHorusButton('#dropdownMenu2','fa fa-user-friends','Double Room');"><i class="fa fa-user-friends"></i> Double Room</button>
+                                              <button class="dropdown-item" type="button" onclick="updateHorusButton('#dropdownMenu2','fa fa-users','Family Room');"><i class="fa fa-users"></i> Family Room</button>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="sidebar-left col-12 px-0 col-sm-4 col-md-3 sticky-top">
+                            <div class="bg-dark text-white p-2">
+                                <strong>Filter</strong>
+                            </div>
+                            <form action="javascript:void(0);">
+                            <div class="filter_box">
+                                <div class="filter_title">
+                                    <label for="customRange2">Price <span class="float-right d-inline-block">max. <span id="search_price_max"></span><span></label>
+                                </div>
+                                <div class="filter_body">
+                                    <input type="range" class="custom-range" min="700" oninput="updatePrice('#search_price_max',this.value);" value="4500" max="10000" id="search_price">
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="col-12 col-sm-8 col-md-9"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
